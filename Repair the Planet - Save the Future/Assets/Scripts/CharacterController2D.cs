@@ -11,6 +11,8 @@ public enum GroundType
 
 public class CharacterController2D : MonoBehaviour
 {
+    Vector2 m_Look;
+    Vector2 m_Move;
     readonly Vector3 flippedScale = new Vector3(-1, 1, 1);
     readonly Quaternion flippedRotation = new Quaternion(0, 0, 1, 0);
 
@@ -73,24 +75,17 @@ public class CharacterController2D : MonoBehaviour
 
     void Update()
     {
-        var keyboard = Keyboard.current;
+        // Using the new Input System marked with //+IS
+        var gamepad = Gamepad.current; //+IS
 
-        if (!CanMove || keyboard == null)
-            return;
+        if (!CanMove || gamepad == null) //+IS
+            return; // No gamepad connected.
 
-        // Horizontal movement
-        float moveHorizontal = 0.0f;
+        movementInput = new Vector2(m_Move[0], 0);
 
-        if (keyboard.leftArrowKey.isPressed || keyboard.aKey.isPressed)
-            moveHorizontal = -1.0f;
-        else if (keyboard.rightArrowKey.isPressed || keyboard.dKey.isPressed)
-            moveHorizontal = 1.0f;
+        // if (gamepad.rightTrigger.wasPressedThisFrame)
+        //     Debug.Log("Activate solar power");
 
-        movementInput = new Vector2(moveHorizontal, 0);
-
-        // Jumping input
-        if (!isJumping && keyboard.spaceKey.wasPressedThisFrame)
-            jumpInput = true;
     }
 
     void FixedUpdate()
@@ -103,8 +98,25 @@ public class CharacterController2D : MonoBehaviour
         UpdateGravityScale();
 
         prevVelocity = controllerRigidbody.velocity;
+
     }
 
+//Movement through Input System
+public void OnMove(InputValue value)
+{
+    m_Move = value.Get<Vector2>();
+}
+
+public void OnJump(InputValue value)
+{
+    jumpInput = true;
+}
+
+public void OnFire(InputValue value)
+{
+    Debug.Log("Activate solar power");
+}
+ 
     private void UpdateGrounding()
     {
         // Use character collider to check if touching ground layers
@@ -146,6 +158,7 @@ public class CharacterController2D : MonoBehaviour
 
     private void UpdateJump()
     {
+
         // Set falling flag
         if (isJumping && controllerRigidbody.velocity.y < 0)
             isFalling = true;
