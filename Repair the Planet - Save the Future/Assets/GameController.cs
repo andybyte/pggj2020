@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour
 
         InvokeRepeating("UpdateSeaLevel", 1.0f, 1.0f);
 
-        InvokeRepeating("Survive", 1.0f, 1.0f);
+        //InvokeRepeating("Survive", 1.0f, 1.0f);
     }
 
     // Update is called once per frame
@@ -124,8 +124,8 @@ public class GameController : MonoBehaviour
         
     }
 
-    private void Survive()
+    public void AddPoints(float morepoints)
     {
-        victories += 1;
+        victories += morepoints;
     }
 }

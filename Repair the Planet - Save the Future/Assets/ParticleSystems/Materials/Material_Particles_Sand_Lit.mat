@@ -10,7 +10,7 @@ Material:
   m_Name: Material_Particles_Sand_Lit
   m_Shader: {fileID: -6465566751694194690, guid: 032a29e50acf417428a770979950c440,
     type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _EMISSION _RECEIVE_SHADOWS_OFF
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _ALPHATEST_ON _EMISSION _RECEIVE_SHADOWS_OFF
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
