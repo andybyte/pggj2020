@@ -6,6 +6,11 @@ public class GameController : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    public GameObject spawner;
+
+    public GameObject spawnthis;
+    public GameObject win_state;
+    public GameObject lose_state;
     public float gamestate;
     public float sealevelmax;
     public float currentsealevel;
@@ -36,12 +41,19 @@ public class GameController : MonoBehaviour
 
         InvokeRepeating("UpdateSeaLevel", 1.0f, 1.0f);
 
+        InvokeRepeating("Spawn", 3.0f, 12.0f);
+
         //InvokeRepeating("Survive", 1.0f, 1.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gamestate==2)
+            win_state.SetActive(true);
+        if (gamestate==3)
+            lose_state.SetActive(true);
+        
         if (currentsealevel>sealevelmax)
             Debug.Log("Game Over");
 
@@ -112,6 +124,11 @@ public class GameController : MonoBehaviour
         }
     }
 
+    void Spawn()
+    {
+        Instantiate(spawnthis, new Vector3(Random.Range(-57.0f, -19.0f), 22.3f, 0.0f), Quaternion.identity);
+    }
+
     public float GetVictoryStatus()
     {
         return(victorystatus);
@@ -121,6 +138,9 @@ public class GameController : MonoBehaviour
     {
         if (gamestate==1)
             currentsealevel = sealeveltransform.position.y;
+
+        if (currentsealevel>sealevelmax)
+            gamestate = 3;
         
     }
 

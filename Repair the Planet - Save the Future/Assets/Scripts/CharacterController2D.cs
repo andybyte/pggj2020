@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Experimental.U2D.Animation;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public enum GroundType
 {
@@ -119,6 +120,11 @@ public void OnJump(InputValue value)
 public void OnFire(InputValue value)
 {
     
+}
+
+public void OnRestart(InputValue value)
+{
+    SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
 }
  
     private void UpdateGrounding()

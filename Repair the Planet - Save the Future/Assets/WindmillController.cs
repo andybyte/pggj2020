@@ -11,12 +11,23 @@ public class WindmillController : MonoBehaviour
 
     public GameObject dustcloud;
 
+    AudioSource audioData;
+
+    bool warned;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
         animator = petals.GetComponent<Animator>();
 
         InvokeRepeating("UseEnergy", 3.0f, 1.0f);
+
+        audioData = GetComponent<AudioSource>();
+
+        warned = false;
+        
     }
 
     void UseEnergy () 
@@ -28,6 +39,13 @@ public class WindmillController : MonoBehaviour
         } else {
             animator.SetFloat("State",0);
             dustcloud.SetActive(false);
+
+            if(warned==false)
+            {
+                audioData.Play(0);
+                warned = true;
+            }
+                
         }
     }
 
@@ -51,11 +69,15 @@ public class WindmillController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D  collision) 
      {
         Collider2D collider = collision.collider;
+
+        Debug.Log(collider.gameObject.tag);
         
-        if(collider.name == "SolarEnergy")
+        if(collider.gameObject.tag == "energy")
         {
             animator.SetFloat("State",1);
             dustcloud.SetActive(true);
+            audioData.Play(1);
+            warned = false;
             float takeenergy = collision.gameObject.GetComponent<EnemyScript>().GetEnergyLevel();
             Debug.Log("here is " + takeenergy);
             energy+=takeenergy;

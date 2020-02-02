@@ -7,6 +7,7 @@ TagManager:
   - tenpercent
   - tentag
   - Other
+  - energy
   layers:
   - Default
   - TransparentFX
