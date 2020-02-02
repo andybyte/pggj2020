@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour
 
         InvokeRepeating("UpdateSeaLevel", 1.0f, 1.0f);
 
-        InvokeRepeating("Spawn", 3.0f, 12.0f);
+        InvokeRepeating("Spawn", 1.0f, 12.0f);
 
         //InvokeRepeating("Survive", 1.0f, 1.0f);
     }
@@ -126,7 +126,7 @@ public class GameController : MonoBehaviour
 
     void Spawn()
     {
-        Instantiate(spawnthis, new Vector3(Random.Range(-57.0f, -19.0f), 22.3f, 0.0f), Quaternion.identity);
+        Instantiate(spawnthis, new Vector3(Random.Range(-47.0f, -09.0f), 22.3f, 0.0f), Quaternion.identity);
     }
 
     public float GetVictoryStatus()
