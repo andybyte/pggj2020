@@ -118,7 +118,7 @@ public void OnJump(InputValue value)
 
 public void OnFire(InputValue value)
 {
-    Debug.Log("Activate solar power");
+    
 }
  
     private void UpdateGrounding()
