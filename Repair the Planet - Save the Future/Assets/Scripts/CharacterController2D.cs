@@ -76,13 +76,7 @@ public class CharacterController2D : MonoBehaviour
     void Update()
     {
         // Using the new Input System marked with //+IS
-        var gamepad = Gamepad.current; //+IS
-
-        if (!CanMove || gamepad == null) //+IS
-            return; // No gamepad connected.
-
-        movementInput = new Vector2(m_Move[0], 0);
-
+        
         // if (gamepad.rightTrigger.wasPressedThisFrame)
         //     Debug.Log("Activate solar power");
 
@@ -90,6 +84,16 @@ public class CharacterController2D : MonoBehaviour
 
     void FixedUpdate()
     {
+        var gamepad = Gamepad.current; //+IS
+
+        if (!CanMove || gamepad == null) //+IS
+            return; // No gamepad connected.
+
+        if (m_Move[0] != 0)
+        {
+            movementInput = new Vector2(m_Move[0], 0);
+        }
+
         UpdateGrounding();
         UpdateVelocity();
         UpdateDirection();
