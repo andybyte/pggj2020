@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     passTag: RenderEverything
-    Event: 300
+    Event: 450
     filterSettings:
       RenderQueueType: 1
       LayerMask:
